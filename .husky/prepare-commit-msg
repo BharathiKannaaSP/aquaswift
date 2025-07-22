@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# If no commit message was passed (interactive commit)
+if [ -z "$2" ]; then
+  exec < /dev/tty && pnpm cz --hook || true
+else
+  pnpm commitlint --edit "$1"
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌ Invalid commit message!"
+    echo "✅ Please use 'pnpm commit' to follow commit message conventions."
+    echo ""
+    exit 1
+  fi
+fi

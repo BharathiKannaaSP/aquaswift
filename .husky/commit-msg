@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# This script is used to validate commit messages
+# It checks if the commit message meets the required format
+pnpm commitlint --edit $1
