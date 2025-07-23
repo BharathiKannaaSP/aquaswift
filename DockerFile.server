@@ -4,4 +4,5 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 COPY server ./server
 RUN pnpm install --prefix ./server
+RUN pnpm --prefix ./server run build
 CMD ["pnpm", "--prefix", "server", "start"]
