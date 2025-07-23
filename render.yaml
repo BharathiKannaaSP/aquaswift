@@ -3,11 +3,11 @@ services:
     name: aquaswift-frontend
     env: docker
     plan: free
-    dockerfilePath: Dockerfile.nginx
+    dockerfilePath: DockerFile.nginx
     buildFilter:
       paths:
         - client/**/*
-        - Dockerfile.nginx
+        - DockerFile.nginx
         - nginx.conf
     autoDeploy: true
     envVars:
@@ -19,8 +19,8 @@ services:
     name: aquaswift-backend
     env: node
     plan: free
-    buildCommand: pnpm install
-    startCommand: pnpm start
+    buildCommand: pnpm install && pnpm build
+    startCommand: node dist/index.ts
     rootDir: server
     autoDeploy: true
     envVars:
