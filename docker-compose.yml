@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: DockerFile.server
+    ports:
+      - "8000:8000"
+  nginx:
+    build: 
+      context: .
+      dockerfile: DockerFile.nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
