@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: aquaswift-backend
+    env: docker
+    dockerfilePath: ./Dockerfile.server
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8080
+      # Add your other env vars like MONGO_URI here
+      # - key: MONGO_URI
+      #   value: your_connection_string
+
+  - type: web
+    name: aquaswift-frontend
+    env: docker
+    dockerfilePath: ./Dockerfile.nginx
+    autoDeploy: true
