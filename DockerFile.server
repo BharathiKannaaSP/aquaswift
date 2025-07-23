@@ -2,7 +2,10 @@ FROM node:18
 # Enable pnpm via corepack (faster + cleaner)
 RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
+COPY tsconfig.base.json ./tsconfig.base.json
+COPY pnpm-lock.yaml ./
+COPY server/package.json ./server/
 COPY server ./server
 RUN pnpm install --prefix ./server
 RUN pnpm --prefix ./server run build
-CMD ["pnpm", "--prefix", "server", "start"]
+CMD ["node", "server/dist/index.js"]

@@ -1,8 +1,12 @@
-FROM node:18
+FROM node:18 AS client-build
+RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
+
+COPY tsconfig.base.json ./tsconfig.base.json
 COPY client ./client
-RUN cd client && pnpm install && pnpm build
+
+RUN pnpm install --prefix ./client && pnpm --prefix ./client run build
 
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/client/dist /usr/share/nginx/html
+COPY --from=client-build /app/client/dist /usr/share/nginx/html
