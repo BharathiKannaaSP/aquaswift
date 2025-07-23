@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: aquaswift-frontend
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile.nginx
+    buildFilter:
+      paths:
+        - client/**/*
+        - Dockerfile.nginx
+        - nginx.conf
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
+
+  - type: web
+    name: aquaswift-backend
+    env: node
+    plan: free
+    buildCommand: pnpm install
+    startCommand: pnpm start
+    rootDir: server
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
