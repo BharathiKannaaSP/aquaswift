@@ -1,5 +1,7 @@
 FROM node:18
+# Enable pnpm via corepack (faster + cleaner)
+RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 COPY server ./server
-RUN cd server && pnpm install
+RUN pnpm install --prefix ./server
 CMD ["pnpm", "--prefix", "server", "start"]
