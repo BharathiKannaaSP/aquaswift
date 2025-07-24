@@ -9,5 +9,5 @@ app.get('/api/health', (req, res) => {
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhossjjt:${PORT}`);
 });
