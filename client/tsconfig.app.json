@@ -1,3 +1,8 @@
 {
-  "extends": "../tsconfig.base.json"
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  },
+   "include": ["src", "src/__tests__", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "build", "coverage"]
 }
