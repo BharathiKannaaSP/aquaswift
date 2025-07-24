@@ -19,12 +19,15 @@ services:
     name: aquaswift-backend
     env: node
     plan: free
-    buildCommand: pnpm install && pnpm build
-    startCommand: node dist/index.js
-    rootDir: server
+    dockerfilePath: DockerFile.server
+    buildFilter:
+      paths:
+        - server/**/*
+        - DockerFile.server
     autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 8000
+    healthCheckPath: /api/health
