@@ -11,9 +11,10 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "lint": "turbo run lint",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write ."
   },
   "lint-staged": {
     "client/**/*.{ts,tsx,js,jsx}": [

@@ -5,12 +5,12 @@ services:
       context: .
       dockerfile: DockerFile.server
     ports:
-      - "8000:8000"
+      - '8000:8000'
   nginx:
-    build: 
+    build:
       context: .
       dockerfile: DockerFile.nginx
     ports:
-      - "80:80"
+      - '80:80'
     depends_on:
       - backend

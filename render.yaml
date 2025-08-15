@@ -17,7 +17,7 @@ services:
 
   - type: web
     name: aquaswift-backend
-    env: node
+    env: docker
     plan: free
     dockerfilePath: DockerFile.server
     buildFilter:
