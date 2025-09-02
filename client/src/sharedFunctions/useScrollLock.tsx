@@ -2,21 +2,32 @@ import { useEffect } from 'react';
 
 export const useScrollLock = (locked: boolean) => {
   useEffect(() => {
-    const html = document.documentElement;
     const body = document.body;
 
     if (locked) {
-      html.classList.add('overflow-hidden');
-      body.classList.add('overflow-hidden');
+      const scrollY = window.scrollY; // save current scroll position
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollY}px`;
+      body.style.width = '100%';
     } else {
-      html.classList.remove('overflow-hidden');
-      body.classList.remove('overflow-hidden');
+      const scrollY = body.style.top;
+      body.style.position = '';
+      body.style.top = '';
+      body.style.width = '';
+      if (scrollY) {
+        // restore scroll position
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
-    // ✅ Cleanup on unmount to prevent stuck scroll
     return () => {
-      html.classList.remove('overflow-hidden');
-      body.classList.remove('overflow-hidden');
+      const scrollY = body.style.top;
+      body.style.position = '';
+      body.style.top = '';
+      body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     };
   }, [locked]);
 };

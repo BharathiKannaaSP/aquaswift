@@ -70,7 +70,10 @@ const Footer = () => {
             <div>
               <span>2025. AquaSwift. All rights reserved.</span>
               <br />
-              <span className="text-gray">Website designed by Bharathi Kannaa</span>
+              <span className="text-gray">
+                Website designed by{' '}
+                <span className="underline underline-offset-2 cursor-pointer">Bharathi Kannaa</span>
+              </span>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ interface ButtonProps {
   label: string;
   onClick?: () => void;
   href?: string;
-  size: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   variant: 'dark' | 'light';
   fullWidth?: boolean;
   containerClass?: string;

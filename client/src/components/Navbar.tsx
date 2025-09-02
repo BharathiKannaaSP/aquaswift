@@ -3,14 +3,18 @@ import { NAV_LINKS } from '../constants/NavbarConstants';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import AnimatedButton from '../animations/AnimatedButton';
+import { useLocation } from 'react-router';
+import { FiShoppingCart } from 'react-icons/fi';
+import { useScrollLock } from '../sharedFunctions/useScrollLock';
 
 const Navbar = () => {
   const navbarContainer = useRef<HTMLDivElement | null>(null);
   const [isOpen, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setOpen(!isOpen);
-
+  useScrollLock(isOpen);
   useEffect(() => {
     const handleScroll = () => {
       // window.innerHeight gives 100vh in pixels
@@ -56,19 +60,28 @@ const Navbar = () => {
     <div ref={navbarContainer} className="relative">
       <nav
         className={`fixed  top-0 left-0 w-full h-20 px-8 py-6 flex items-center justify-between z-50 transition-colors duration-300 ${
-          scrolled ? 'bg-white text-black' : 'bg-transparent text-main-bg'
+          // scrolled || location.pathname === '/singleProduct/Aquafina'
+          scrolled || location.pathname !== '/'
+            ? 'bg-white text-black'
+            : 'bg-transparent text-main-bg'
         }`}
       >
         <div className="cursor-pointer text-xs  font-normal">
           <a href="/">AQUASWIFT</a>
         </div>
-        <div className="cursor-pointer uppercase text-xs  flex items-center gap-4">
+        <div className="cursor-pointer uppercase text-xs  flex items-center gap-10">
           <AnimatedButton
             size="sm"
             variant="dark"
             label="Join Waitlist"
             containerClass="hidden lg:flex"
           />
+          <div className="relative">
+            <FiShoppingCart size={20} />
+            <div className="absolute -top-4 left-2 bg-black pt-[2px] rounded-full text-center w-8 h-6 text-main-bg">
+              <span className="text-sm">20</span>
+            </div>
+          </div>
           <button className="cursor-pointer uppercase flex items-center gap-2" onClick={toggleMenu}>
             Menu <div className="w-2 h-2 rounded-full bg-black" />
           </button>
@@ -79,7 +92,7 @@ const Navbar = () => {
       <div className="menu-overlay fixed inset-0 px-8 py-6 flex flex-col bg-main-bg clip-path-hidden z-60">
         {/* Overlay Header */}
         <div className="flex items-center justify-between">
-          <a href="/" className="text-lg font-medium">
+          <a tabIndex={isOpen ? 0 : -1} href="/" className="text-lg font-medium">
             Aquaswift
           </a>
         </div>
@@ -95,9 +108,14 @@ const Navbar = () => {
           <div className="flex flex-col gap-4">
             {NAV_LINKS.map((link, index) => (
               <div key={index} className="menu-link-item">
-                <div className="menu-link-item-holder relative" onClick={toggleMenu}>
+                <div
+                  className="menu-link-item-holder relative"
+                  tabIndex={isOpen ? 0 : -1}
+                  onClick={toggleMenu}
+                >
                   <a
                     href={link.href}
+                    tabIndex={isOpen ? 0 : -1}
                     className="text-[clamp(36px,6vw,80px)] font-normal leading-[85%] tracking-[-.02em]"
                   >
                     {link.name}
@@ -119,11 +137,21 @@ const Navbar = () => {
           {/* Info Section */}
           <div className="flex justify-between">
             <div className="flex flex-col gap-1 text-sm uppercase">
-              <a href="https://www.x.com">X &#8599;</a>
-              <a href="">Instagram &#8599;</a>
-              <a href="">LinkedIn &#8599;</a>
-              <a href="">Behance &#8599;</a>
-              <a href="">Dribbble &#8599;</a>
+              <a tabIndex={isOpen ? 0 : -1} href="https://www.x.com">
+                X &#8599;
+              </a>
+              <a tabIndex={isOpen ? 0 : -1} href="">
+                Instagram &#8599;
+              </a>
+              <a tabIndex={isOpen ? 0 : -1} href="">
+                LinkedIn &#8599;
+              </a>
+              <a tabIndex={isOpen ? 0 : -1} href="">
+                Behance &#8599;
+              </a>
+              <a tabIndex={isOpen ? 0 : -1} href="">
+                Dribbble &#8599;
+              </a>
             </div>
             <div className="flex flex-col gap-1 text-sm">
               <p>info@aquaswift.com</p>
