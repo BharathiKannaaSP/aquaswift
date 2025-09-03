@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PeekPanel from './PeekPanel';
 import SingleProductCategories from './SingleProductCategories';
+import Reviews from './Reviews';
+import Subscription from './Subscription';
 
 const SingleProductBottom = () => {
   const [activePanel, setActivePanel] = useState<null | string>(null);
@@ -50,13 +52,17 @@ const SingleProductBottom = () => {
           </div>
         </div>
       </div>
-      <div className="p-4">
-        <p>RELATED PRODUCTS</p>
+      <div className="p-8">
+        <p className="text-sm">RELATED PRODUCTS</p>
         <SingleProductCategories />
       </div>
-      <div className="p-4">
-        <p>REVIEWS</p>
+      <div className="p-8">
+        <p className="text-sm">REVIEWS</p>
+        <Reviews />
       </div>
+
+      <Subscription />
+
       {/* // Peek Panel */}
       <PeekPanel activePanel={activePanel} onClose={handleClosePanel} />
     </>

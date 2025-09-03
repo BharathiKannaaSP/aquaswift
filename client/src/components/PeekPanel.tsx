@@ -1,7 +1,7 @@
-import React from 'react';
 import { useScrollLock } from '../sharedFunctions/useScrollLock';
 import { IoMdClose } from 'react-icons/io';
 import Separator from './Separator';
+import CartPanel from './CartPanel';
 
 interface PeekPanelProps {
   activePanel: null | string;
@@ -10,6 +10,7 @@ interface PeekPanelProps {
 
 const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
   useScrollLock(!!activePanel);
+
   return (
     <>
       {/* // Overlay */}
@@ -19,7 +20,7 @@ const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
         onClick={onClose}
       />
       <div
-        className={`p-6 h-full fixed overflow-auto top-0 right-0 bg-white z-50 shadow-lg transform transition-transform duration-300 ${activePanel ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`p-6 w-full lg:w-auto h-full fixed  top-0 right-0 bg-white z-50  transform transition-transform duration-300 ${activePanel ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className=" flex justify-between items-center gap-8">
           <h2 className="text-xs uppercase">{activePanel}</h2>
@@ -28,25 +29,25 @@ const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
         {activePanel === 'Delivery Instructions' && (
           <div className="mt-10">
             <p>Deliveries:</p>
-            <div className="flex gap-4 mt-10 text-sm">
-              <div className="flex flex-col gap-6">
-                <span>Home Delivery</span>
-                <span>Bulk / Event Delivery (20L cans or 200ml bottles)</span>
-                <span>Express Delivery</span>
-              </div>
-              <div className="flex flex-col gap-6">
-                <span>24 hours</span>
-                <span>Scheduled as per order</span>
-                <span>Same-day priority delivery</span>
-              </div>
-              <div className="flex flex-col gap-6">
-                <span>
-                  ₹20 <span className="text-gray">(Free delivery on orders above Rs.500)</span>
-                </span>
-                <span>Cost calculated based on quantity (may be free for large orders)</span>
-                <span>Cost: ₹100 (fixed), not eligible for free delivery</span>
-              </div>
+            <div className="grid grid-cols-3 gap-x-6 gap-y-4 mt-10 text-sm">
+              {/* Row 1 */}
+              <span>Home Delivery</span>
+              <span>24 hours</span>
+              <span>
+                ₹20 <span className="text-gray">(Free delivery on orders above ₹500)</span>
+              </span>
+
+              {/* Row 2 */}
+              <span>Bulk / Event Delivery (20L cans or 200ml bottles)</span>
+              <span>Scheduled as per order</span>
+              <span>Cost calculated based on quantity (may be free for large orders)</span>
+
+              {/* Row 3 */}
+              <span>Express Delivery</span>
+              <span>Same-day priority delivery</span>
+              <span>Cost: ₹100 (fixed), not eligible for free delivery</span>
             </div>
+
             <div className="mt-10">
               <Separator variant="dark" />
             </div>
@@ -96,7 +97,7 @@ const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
 
         {activePanel === 'Additional Information' && (
           <div className="mt-10">
-            <div className="w-96 flex flex-col gap-6">
+            <div className="w-full lg:w-96 flex flex-col gap-6">
               <p>Manufactured by:</p>
               <span className="text-sm">
                 For Manufactured by please see product label Marketed by: Bisleri International Pvt
@@ -123,6 +124,20 @@ const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
               </div>
             </div>
           </div>
+        )}
+
+        {activePanel === 'Cart' && (
+          <>
+            <CartPanel />
+            <div className="fixed bottom-0 left-0 z-50 bg-white border-0 border-t-1 w-full px-6 py-4 h-16">
+              <div className="flex justify-between items-center">
+                <button className="border-1 p-2 cursor-pointer px-8">View Cart</button>
+                <button className="border-1 p-2 cursor-pointer px-8 bg-black text-main-bg">
+                  Checkout
+                </button>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </>

@@ -92,9 +92,7 @@ const SingleProduct = () => {
           </div>
         </div>
         {/* // Single Product Bottom */}
-        <div className="p-4">
-          <SingleProductBottom />
-        </div>
+        <SingleProductBottom />
       </div>
     </div>
   );
