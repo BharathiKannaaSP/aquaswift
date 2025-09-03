@@ -116,6 +116,8 @@ const CartPanel = () => {
         </div>
         <Separator variant="dark" />
       </div>
+
+      {/* SubTotal Section */}
       <div>
         <div className="mt-4  lg:mt-10 flex items-center justify-between text-sm">
           <p>Subtotal</p>

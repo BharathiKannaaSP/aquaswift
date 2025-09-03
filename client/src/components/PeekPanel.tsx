@@ -19,6 +19,8 @@ const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
             ${activePanel ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
         onClick={onClose}
       />
+      {/*Overlay ends */}
+
       <div
         className={`p-6 w-full lg:w-auto h-full fixed  top-0 right-0 bg-white z-50  transform transition-transform duration-300 ${activePanel ? 'translate-x-0' : 'translate-x-full'}`}
       >
@@ -26,6 +28,7 @@ const PeekPanel = ({ activePanel, onClose }: PeekPanelProps) => {
           <h2 className="text-xs uppercase">{activePanel}</h2>
           <IoMdClose size={20} onClick={onClose} className="cursor-pointer" />
         </div>
+
         {activePanel === 'Delivery Instructions' && (
           <div className="mt-10">
             <p>Deliveries:</p>
