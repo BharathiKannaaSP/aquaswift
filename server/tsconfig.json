@@ -3,9 +3,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
     "noEmit": false
   },
-  "include": ["src"]
+  "include": ["index.ts", "lib", "controllers", "index.ts", "sharedFunction", "routes"]
 }
