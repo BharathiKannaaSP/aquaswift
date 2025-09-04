@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
-import authRoutes from './routes/authRoutes';
+import authRoutes from './routes/authRoutes.ts';
 
 dotenv.config();
 const app = express();

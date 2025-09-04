@@ -14,7 +14,7 @@ dist-ssr
 .turbo
 tsconfig.tsbuildinfo
 .env
-client/convex/_generated
+
 
 # Editor directories and files
 .vscode/*

@@ -6,6 +6,8 @@ services:
       dockerfile: DockerFile.server
     ports:
       - '8000:8000'
+    environment:
+      DATABASE_URL: "mongodb+srv://bharathikannaa:bharathikannaa@aquaswift.1njv0ij.mongodb.net/aquaswift?retryWrites=true&w=majority&appName=AquaSwift"
   nginx:
     build:
       context: .

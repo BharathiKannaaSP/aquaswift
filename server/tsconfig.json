@@ -2,10 +2,12 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "rootDir": ".",
     "outDir": "dist",
-    "noEmit": false
+    "rootDir": ".",
+    "noEmit": true,
+    "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["index.ts", "lib", "controllers", "index.ts", "sharedFunction", "routes"]
+  "include": ["index.ts", "lib/**/*", "controllers/**/*", "sharedFunction/**/*", "routes/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

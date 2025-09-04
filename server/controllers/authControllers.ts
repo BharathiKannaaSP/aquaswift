@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import prisma from '../lib/prisma';
+import prisma from '../lib/prisma.ts';
 
 export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;

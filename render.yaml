@@ -9,7 +9,7 @@ services:
         - client/**/*
         - DockerFile.nginx
         - nginx.conf
-    autoDeploy: false
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
@@ -24,7 +24,7 @@ services:
       paths:
         - server/**/*
         - DockerFile.server
-    autoDeploy: false
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production

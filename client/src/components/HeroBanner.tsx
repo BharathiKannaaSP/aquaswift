@@ -1,8 +1,12 @@
 import AnimatedTitle from '../animations/AnimatedTitle';
 import { features } from '../constants/HeroBannerConstants';
 import AnimatedButton from '../animations/AnimatedButton';
+import { useUser } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router';
 
 const HeroBanner = () => {
+  const { user } = useUser();
+  const navigate = useNavigate();
   return (
     <section className="relative w-full h-screen">
       <div className=" relative py-24 px-8 z-15 h-full flex flex-col justify-between">
@@ -26,7 +30,14 @@ const HeroBanner = () => {
             <p className="text-3xl text-main-bg">
               Your body holds the answers — we help you see them.
             </p>
-            <AnimatedButton size="md" variant="light" label="Join Waitlist" />
+            {!user && (
+              <AnimatedButton
+                size="md"
+                variant="light"
+                label="Join Waitlist"
+                onClick={() => navigate('/login')}
+              />
+            )}
           </div>
         </div>
       </div>
