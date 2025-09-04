@@ -15,23 +15,21 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      if (!signUp) {
-        throw new Error('SignUp is not available.');
-      }
-      // Create the user in Clerk
-      await signUp.create({
+      if (!signUp) throw new Error('SignUp not available');
+
+      const { createdSessionId } = await signUp.create({
         emailAddress: email,
         password: password,
-        username: username, // Using phone number as username
+        username: username,
       });
 
-      // After successful sign-up, set the user session
-      await setActive({ session: signUp.createdSessionId });
+      if (!createdSessionId) throw new Error('Session not created');
 
-      navigate('/'); // Redirect after success
+      await setActive({ session: createdSessionId });
+
+      navigate('/');
     } catch (err: any) {
       setError(err.message);
-      throw new Error(err.message);
     }
   };
 
