@@ -42,4 +42,11 @@ export default tseslint.config([
       ],
     },
   },
+  // ✅ Override specifically for backend files
+  {
+    files: ['server/**/*.{ts,tsx,js,jsx}'],
+    rules: {
+      'no-console': 'off', // allow console logs in backend only
+    },
+  },
 ]);

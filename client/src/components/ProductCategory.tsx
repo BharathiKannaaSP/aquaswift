@@ -10,6 +10,7 @@ const ProductCategory = () => {
     <div className="w-full h-full p-6 relative flex flex-col gap-4 ">
       {productCategory.map((product) => (
         <div
+          key={product.id}
           style={{ backgroundColor: 'black' }}
           className="flex flex-col lg:flex-row text-main-bg  rounded-2xl gap-8 p-8"
         >

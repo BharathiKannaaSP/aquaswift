@@ -3,10 +3,11 @@ import { NAV_LINKS } from '../constants/NavbarConstants';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import AnimatedButton from '../animations/AnimatedButton';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useScrollLock } from '../sharedFunctions/useScrollLock';
 import PeekPanel from './PeekPanel';
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
 
 const Navbar = () => {
   const navbarContainer = useRef<HTMLDivElement | null>(null);
@@ -14,7 +15,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [cartCardOpen, setCardCardOpen] = useState<null | string>(null);
   const location = useLocation();
-
+  const { isLoaded } = useUser();
+  const navigate = useNavigate();
   const toggleMenu = () => setOpen(!isOpen);
   useScrollLock(isOpen);
   useEffect(() => {
@@ -65,7 +67,7 @@ const Navbar = () => {
   const handleClosePanel = () => {
     setCardCardOpen(null);
   };
-
+  if (!isLoaded) return null;
   return (
     <>
       <div ref={navbarContainer} className="relative">
@@ -81,12 +83,18 @@ const Navbar = () => {
             <a href="/">AQUASWIFT</a>
           </div>
           <div className="cursor-pointer uppercase text-xs  flex items-center gap-10">
-            <AnimatedButton
-              size="sm"
-              variant="dark"
-              label="Join Waitlist"
-              containerClass="hidden lg:flex"
-            />
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <AnimatedButton
+                onClick={() => navigate('/login')}
+                size="sm"
+                variant="dark"
+                label="Join Waitlist"
+                containerClass="hidden lg:flex"
+              />
+            </SignedOut>
             <div className="relative" onClick={() => handleOpenPanel('Cart')}>
               <FiShoppingCart size={20} />
               <div className="absolute -top-4 left-2 bg-black pt-[2px] rounded-full text-center w-8 h-6 text-main-bg">

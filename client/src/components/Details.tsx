@@ -11,7 +11,7 @@ const Details = () => {
           <p>For individuals who want clean water, anytime, anywhere</p>
           <Separator variant="dark" />
           {personalFeatures.map((personalFeature) => (
-            <div className="mt-4">
+            <div className="mt-4" key={personalFeature.title}>
               <div className="flex flex-col gap-2">
                 <h2>{personalFeature.title}</h2>
                 <p className="text-sm text-gray">{personalFeature.description}</p>
@@ -25,7 +25,7 @@ const Details = () => {
           <p>For offices and businesses needing seamless water management</p>
           <Separator variant="light" />
           {professionalFeatures.map((professionalFeature) => (
-            <div className="mt-4">
+            <div className="mt-4" key={professionalFeature.title}>
               <div className="flex flex-col gap-2">
                 <h2>{professionalFeature.title}</h2>
                 <p className="text-sm text-gray">{professionalFeature.description}</p>
